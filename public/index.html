@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>HDP Cartas 🃏</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: MAIN MENU
+══════════════════════════════════════════════ -->
+<div id="screen-menu" class="screen active">
+  <div class="menu-container">
+    <div class="logo">
+      <span class="logo-hdp">HDP</span>
+      <span class="logo-cartas">Cartas</span>
+      <div class="logo-sub">El juego de cartas más irrespetuoso de Argentina</div>
+    </div>
+    <div class="menu-buttons">
+      <button class="btn btn-primary btn-lg" onclick="showScreen('screen-setup')">🃏 Crear Partida</button>
+      <button class="btn btn-secondary btn-lg" onclick="showScreen('screen-join')">🔗 Unirse a Sala</button>
+      <button class="btn btn-ghost btn-lg" onclick="showScreen('screen-rules')">📖 Reglas</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: CREATE GAME
+══════════════════════════════════════════════ -->
+<div id="screen-setup" class="screen">
+  <div class="screen-inner">
+    <button class="btn-back" onclick="showScreen('screen-menu')">← Volver</button>
+    <h2>Crear Partida</h2>
+    <div class="form-group">
+      <label>Tu nombre</label>
+      <input type="text" id="host-name" placeholder="Ej: Pepito" maxlength="20" autocomplete="off" />
+    </div>
+    <div class="form-group">
+      <label>Puntos para ganar</label>
+      <div class="options-row">
+        <button class="option-btn active" data-value="5" onclick="selectOption(this, 'target-score')">5</button>
+        <button class="option-btn" data-value="7" onclick="selectOption(this, 'target-score')">7</button>
+        <button class="option-btn" data-value="10" onclick="selectOption(this, 'target-score')">10</button>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-lg" onclick="createRoom()">🚀 Crear Sala</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: JOIN GAME
+══════════════════════════════════════════════ -->
+<div id="screen-join" class="screen">
+  <div class="screen-inner">
+    <button class="btn-back" onclick="showScreen('screen-menu')">← Volver</button>
+    <h2>Unirse a Sala</h2>
+    <div class="form-group">
+      <label>Tu nombre</label>
+      <input type="text" id="join-name" placeholder="Ej: Carlitos" maxlength="20" autocomplete="off" />
+    </div>
+    <div class="form-group">
+      <label>Código de sala</label>
+      <input type="text" id="join-code" placeholder="Ej: A1B2" maxlength="4" autocomplete="off"
+             style="text-transform:uppercase; font-size:1.4rem; letter-spacing:0.3em; text-align:center;" />
+    </div>
+    <button class="btn btn-primary btn-lg" onclick="joinRoom()">🎮 Unirse</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: RULES
+══════════════════════════════════════════════ -->
+<div id="screen-rules" class="screen">
+  <div class="screen-inner">
+    <button class="btn-back" onclick="showScreen('screen-menu')">← Volver</button>
+    <h2>📖 Reglas del Juego</h2>
+    <div class="rules-content">
+      <div class="rule-block">
+        <h3>🎯 Objetivo</h3>
+        <p>Completar frases con tus cartas blancas para hacer reír al juez. El primero en llegar al puntaje objetivo gana.</p>
+      </div>
+      <div class="rule-block">
+        <h3>🃏 Cómo se juega</h3>
+        <ol>
+          <li>En cada ronda, aparece una <strong>carta negra</strong> con espacios en blanco.</li>
+          <li>Todos (menos el juez) eligen cartas blancas para completarla.</li>
+          <li>El <strong>juez</strong> lee todas las respuestas y elige la más graciosa.</li>
+          <li>El jugador de la respuesta ganadora suma un punto.</li>
+          <li>El rol de juez rota cada ronda.</li>
+        </ol>
+      </div>
+      <div class="rule-block">
+        <h3>⚠️ Una o dos cartas</h3>
+        <p>Si la carta negra tiene <strong>1 espacio</strong> → elegís 1 carta blanca.<br/>
+        Si tiene <strong>2 espacios</strong> → elegís 2 cartas blancas en el orden que quieras.</p>
+      </div>
+      <div class="rule-block">
+        <h3>🤫 Anonimato</h3>
+        <p>Las respuestas se mezclan antes de mostrarse. El juez no sabe quién envió cada combinación.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: LOBBY
+══════════════════════════════════════════════ -->
+<div id="screen-lobby" class="screen">
+  <div class="screen-inner lobby-inner">
+    <h2>Sala <span id="lobby-code" class="code-badge"></span></h2>
+    <div class="share-box">
+      <div class="share-link-label">Compartí este link:</div>
+      <div class="share-link-row">
+        <span id="share-link" class="share-link-text"></span>
+        <button class="btn btn-small" onclick="copyLink()">📋 Copiar</button>
+      </div>
+      <div id="qr-container">
+        <canvas id="qr-canvas"></canvas>
+      </div>
+    </div>
+    <div class="lobby-players-title">Jugadores conectados:</div>
+    <ul id="lobby-players" class="lobby-player-list"></ul>
+    <div id="lobby-waiting" class="lobby-waiting-msg">Esperando jugadores...</div>
+    <button id="btn-start" class="btn btn-primary btn-lg hidden" onclick="startGame()">🎮 Iniciar Partida</button>
+    <div id="lobby-min-msg" class="lobby-min-msg hidden">Mínimo 2 jugadores para comenzar</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: PLAYING
+══════════════════════════════════════════════ -->
+<div id="screen-playing" class="screen">
+  <div class="game-layout">
+
+    <!-- TOP BAR -->
+    <div class="game-topbar">
+      <div class="topbar-left">
+        <span class="round-badge">Ronda <span id="round-num">1</span></span>
+      </div>
+      <div class="topbar-center">
+        <div class="scoreboard-mini" id="scoreboard-mini"></div>
+      </div>
+      <div class="topbar-right">
+        <span id="status-badge" class="status-badge"></span>
+      </div>
+    </div>
+
+    <!-- BLACK CARD -->
+    <div class="black-card-area">
+      <div class="black-card" id="black-card-display">
+        <div class="black-card-text" id="black-card-text"></div>
+        <div class="black-card-footer">
+          <span class="blanks-required" id="blanks-required"></span>
+          <span class="hdp-watermark">HDP Cartas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAYER STATUS -->
+    <div class="players-status" id="players-status"></div>
+
+    <!-- JUDGE ZONE / JUDGING -->
+    <div id="judging-area" class="judging-area hidden">
+      <div class="judging-title">⚖️ El juez elige la respuesta ganadora</div>
+      <div id="submissions-list" class="submissions-list"></div>
+    </div>
+
+    <!-- PLAYER HAND -->
+    <div id="player-hand-area" class="player-hand-area">
+      <div class="hand-header">
+        <div class="hand-title" id="hand-title">Tu mano</div>
+        <div class="selected-info" id="selected-info"></div>
+      </div>
+      <div class="hand-cards" id="hand-cards"></div>
+      <div class="hand-actions">
+        <button id="btn-submit" class="btn btn-primary hidden" onclick="submitCards()">✅ Enviar Respuesta</button>
+      </div>
+    </div>
+
+    <!-- JUDGE WAITING -->
+    <div id="judge-waiting-area" class="judge-waiting hidden">
+      <div class="judge-crown">👑</div>
+      <div class="judge-text">Sos el <strong>Juez</strong> esta ronda.</div>
+      <div class="judge-sub">Esperá que todos envíen sus respuestas...</div>
+      <div class="judge-progress" id="judge-progress"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: ROUND RESULT
+══════════════════════════════════════════════ -->
+<div id="screen-result" class="screen">
+  <div class="screen-inner result-inner">
+    <div class="result-title">🏆 Respuesta Ganadora</div>
+
+    <div class="result-black-card" id="result-black-card"></div>
+
+    <div class="result-winner-name" id="result-winner-name"></div>
+
+    <div class="result-winning-cards" id="result-winning-cards"></div>
+
+    <div class="all-answers-title">Todas las respuestas:</div>
+    <div id="result-all-answers" class="result-all-answers"></div>
+
+    <div class="result-scoreboard">
+      <h3>Puntajes</h3>
+      <div id="result-scoreboard-list"></div>
+    </div>
+
+    <button id="btn-next-round" class="btn btn-primary btn-lg hidden" onclick="nextRound()">➡️ Siguiente Ronda</button>
+    <div id="waiting-next-msg" class="waiting-msg">Esperando al host para la siguiente ronda...</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCREEN: GAME OVER
+══════════════════════════════════════════════ -->
+<div id="screen-gameover" class="screen">
+  <div class="screen-inner gameover-inner">
+    <div class="confetti-container" id="confetti-container"></div>
+    <div class="gameover-trophy">🏆</div>
+    <div class="gameover-title">¡Tenemos un ganador!</div>
+    <div class="gameover-winner" id="gameover-winner"></div>
+    <div class="gameover-ranking">
+      <h3>Ranking Final</h3>
+      <div id="gameover-ranking-list"></div>
+    </div>
+    <div class="gameover-buttons">
+      <button id="btn-restart" class="btn btn-primary btn-lg hidden" onclick="restartGame()">🔄 Jugar de Nuevo</button>
+      <button class="btn btn-ghost btn-lg" onclick="goToMenu()">🏠 Menú Principal</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TOAST
+══════════════════════════════════════════════ -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
