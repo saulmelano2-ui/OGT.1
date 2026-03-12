@@ -57,7 +57,7 @@ const BLACK_CARDS = [
 "(Nombrá a un jugador de la mesa) usa el mismo password para todo: __________ .",
 "Científicos crearon un robot mitad __________ mitad __________ .",
 "Vuelve el boxeo al Luna Park: ' __________ ' Calderón vs. ' __________ ' Salazar.",
-"¿Qué tiene que tener tu pareja ideal? __________ ",
+"¿Qué tiene que tener tu pareja ideal? __________ . ",
 "Plantar un árbol, escribir un libro, __________ .",
 "¿Cuál es tu secreto para ser tan sexy? __________ ",
 "Lo que más bronca le da a (nombrá a un jugador de la mesa) es: __________ .",
