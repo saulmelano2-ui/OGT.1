@@ -88,7 +88,7 @@ const BLACK_CARDS = [
 "Macri reemplazó los cuadros de la Casa Rosada por cuadros de __________ .",
 "El gobierno planea reemplazar el Obelisco con un monumento a __________ .",
 "Olmedo y Porcel presentan: A las chicas les gusta __________ .",
-"¿Qué guarda Batman en lo más profundo de la Baticueva?",
+"¿Qué guarda Batman en lo más profundo de la Baticueva? __________ ",
 "Cada vez hay más gente con fobia a __________ .",
 "Informe especial: El lado oscuro de __________ .",
 "Todo bien con el colectivo y la birome, pero el mejor invento argentino es por lejos __________ .",
