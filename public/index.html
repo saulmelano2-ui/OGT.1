@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>HDP Cartas 🃏</title>
+  <title>O.G.T. - Otro Gato Tramposo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1486794812021669"
+
+  <!-- ═══════════════════════════════════════════
+       GOOGLE ADSENSE
+       Reemplazá "ca-pub-XXXXXXXXXXXXXXXX" con
+       tu ID de publisher real de AdSense
+  ═══════════════════════════════════════════ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
      crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -15,16 +25,42 @@
 ══════════════════════════════════════════════ -->
 <div id="screen-menu" class="screen active">
   <div class="menu-container">
-    <div class="logo">
-      <span class="logo-hdp">HDP</span>
-      <span class="logo-cartas">Cartas</span>
-      <div class="logo-sub">El juego de cartas más irrespetuoso de Argentina</div>
+
+    <!-- LOGO BLOCK -->
+    <div class="ogt-logo-block">
+      <div class="ogt-letters">O.G.T.</div>
+      <div class="ogt-subtitle">Otro Gato Tramposo</div>
     </div>
+
+    <!-- BUTTONS -->
     <div class="menu-buttons">
-      <button class="btn btn-primary btn-lg" onclick="showScreen('screen-setup')">🃏 Crear Partida</button>
-      <button class="btn btn-secondary btn-lg" onclick="showScreen('screen-join')">🔗 Unirse a Sala</button>
-      <button class="btn btn-ghost btn-lg" onclick="showScreen('screen-rules')">📖 Reglas</button>
+      <button class="btn btn-ogt-primary btn-lg" onclick="showScreen('screen-setup')">
+        🃏 Crear Partida
+      </button>
+      <button class="btn btn-ogt-outline btn-lg" onclick="showScreen('screen-join')">
+        🔗 Unirse a Sala
+      </button>
+      <button class="btn btn-ogt-outline btn-lg" onclick="showScreen('screen-rules')">
+        📖 Reglas
+      </button>
     </div>
+
+    <!-- BOTTOM: badge + cat -->
+    <div class="ogt-bottom">
+      <div class="ogt-badge">
+        <div class="badge-alerta">ALERTA</div>
+        <div class="badge-humor">HUMOR</div>
+        <div class="badge-negro">NEGRO</div>
+        <div class="badge-age">18+</div>
+      </div>
+      <div class="ogt-cat">
+        <!-- SVG Cat with sunglasses holding cards -->
+        <div class="ogt-cat">
+  <img src="img/gato.png" class="cat-img">
+</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -155,7 +191,7 @@
         <div class="black-card-text" id="black-card-text"></div>
         <div class="black-card-footer">
           <span class="blanks-required" id="blanks-required"></span>
-          <span class="hdp-watermark">HDP Cartas</span>
+          <span class="hdp-watermark">O.G.T.</span>
         </div>
       </div>
     </div>
