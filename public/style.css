@@ -82,11 +82,11 @@ html, body {
 
 .ogt-letters {
   font-family: 'Bebas Neue', 'Arial Black', sans-serif;
-  font-size: clamp(6rem, 24vw, 90rem);
-  font-weight: 190;
+  font-size: clamp(5rem, 24vw, 9rem);
+  font-weight: 900;
   color: #fff;
   line-height: 0.7;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-align: left;
   user-select: none;
 }
@@ -204,14 +204,14 @@ html, body {
 /* Cat SVG */
 .ogt-cat {
   position: absolute;
-  bottom: -85px;
-  right: -0px;
-  width: clamp(160px, 50vw, 220px);
+  bottom: -40px; /* ajustá acá */
+  right: 0;
+  width: 180px; /* fijo */
   z-index: 1;
   filter: drop-shadow(-8px 0 20px rgba(245,166,35,0.15));
 }
 
-.cat-svg {
+.cat-img {
   width: 100%;
   height: auto;
   display: block;
