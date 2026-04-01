@@ -86,7 +86,7 @@ html, body {
   font-weight: 900;
   color: #fff;
   line-height: 0.7;
-  letter-spacing: 0.05em;
+  letter-spacing: clamp(9px, 0vw, 0px);
   text-align: center;
   user-select: none;
 }
